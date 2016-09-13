@@ -1,0 +1,31 @@
+{
+  "name": "tdf",
+  "version": "0.0.5",
+  "description": "Transform data format cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bells17",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:bells17/tdf.git"
+  },
+  "keywords": [
+    "csv",
+    "tsv",
+    "json"
+  ],
+  "bugs": {
+    "url": "https://github.com/bells17/tdf/issues"
+  },
+  "homepage": "https://github.com/bells17/tdf",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "csv-parse": "^1.1.7"
+  },
+  "bin": {
+    "tdf": "bin/tdf"
+  }
+}
