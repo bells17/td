@@ -6,7 +6,7 @@
   "scripts": {
     "build": "$(npm bin)/babel src --out-dir lib --source-maps inline",
     "watch": "$(npm bin)/babel src --out-dir lib --watch --source-maps inline",
-    "test": "$(npm bin)/mocha --compilers js:babel-register ./test/*.spec.js"
+    "test": "$(npm bin)/mocha --timeout 5000 --compilers js:babel-register ./test/*.spec.js"
   },
   "author": "bells17",
   "repository": {

@@ -8,6 +8,7 @@ program
   .option("-d --delimiter [delimiter]", "delimiter", String)
   .option("-f --format [stdin format]", "stdin format", String)
   .option("-q --quote [csv quote string]", "csv quote string", String)
+  .option("-e --encoding [file encoding]", "file encoding", String)
   .option("-o --output [output format]", "output data format", String)
   .parse(process.argv);
 
