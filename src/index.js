@@ -1,11 +1,10 @@
 "use strict";
 
 const fs = require("fs");
-const co = require('co');
+const co = require("co");
 const mime = require("mime");
 const csvParse = require("csv-parse/lib/sync");
 const csvStringify = require("csv-stringify");
-
 
 const transformToCSV = (parsed, delimiter) => {
   return new Promise((resolve, reject) => {
