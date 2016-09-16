@@ -35,7 +35,7 @@ const tdf = (data, options, isFile) => {
   return new Promise((resolve, reject) => {
     co(function*() {
       if (isFile) {
-        const file = fs.readFileSync(data, "UTF8");
+        const file = fs.readFileSync(data, (options.encoding || "utf8"));
         switch (mime.lookup(data)) {
           case "application/json":
             try {
