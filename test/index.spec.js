@@ -36,7 +36,7 @@ describe("tdf", () => {
       },
     ].forEach((v) => {
 
-      it(`transform to ${v.to} from ${v.from}`, (done) => {
+      it(`transform to ${v.to} from ${v.from}`, () => {
         co(function*() {
           let options = {};
           if (v.output) {
@@ -45,7 +45,6 @@ describe("tdf", () => {
           const transformed = yield tdf(`${filepath}.${v.from}`, options, true);
           const expected = fs.readFileSync(`${filepath}.${v.to}`, "utf8");
           assert(transformed === expected);
-          done();
         });
       });
 
@@ -80,7 +79,7 @@ describe("tdf", () => {
       },
     ].forEach((v) => {
 
-      it(`transform to ${v.to} from ${v.from}`, (done) => {
+      it(`transform to ${v.to} from ${v.from}`, () => {
         co(function*() {
           let options = { format: v.from };
           if (v.output) {
@@ -89,7 +88,6 @@ describe("tdf", () => {
           const transformed = yield tdf(fs.readFileSync(`${filepath}.${v.from}`, "utf8"), options);
           const expected = fs.readFileSync(`${filepath}.${v.to}`, "utf8");
           assert(transformed === expected);
-          done();
         });
       });
 
