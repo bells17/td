@@ -2,10 +2,11 @@
   "name": "tdf",
   "version": "0.1.1",
   "description": "Transform data format cli",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "$(npm bin)/mocha --require intelli-espower-loader ./test.js",
-    "example": "$(npm bin)/../../bin/tdf sample/sample.json"
+    "build": "$(npm bin)/babel src --out-dir lib --source-maps inline",
+    "watch": "$(npm bin)/babel src --out-dir lib --watch --source-maps inline",
+    "test": "$(npm bin)/mocha --compilers js:babel-register ./test/*.spec.js"
   },
   "author": "bells17",
   "repository": {
@@ -33,7 +34,9 @@
     "tdf": "bin/tdf"
   },
   "devDependencies": {
-    "intelli-espower-loader": "^1.0.1",
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015-node": "^6.1.1",
+    "babel-register": "^6.14.0",
     "mocha": "^3.0.2",
     "power-assert": "^1.4.1"
   }
