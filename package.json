@@ -1,6 +1,6 @@
 {
   "name": "tdf",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Transform data format cli",
   "main": "index.js",
   "scripts": {
