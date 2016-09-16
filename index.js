@@ -16,7 +16,7 @@ const transformToCSV = (parsed, delimiter) => {
       resolve(csv);
     });
   });
-}
+};
 
 const transform = (parsed, format) => {
   return co(function*() {
@@ -30,57 +30,65 @@ const transform = (parsed, format) => {
         return yield transformToCSV(parsed, ",");
     }
   });
-}
-
+};
 
 const tdf = (data, options, isFile) => {
-  co(function*() {
-    if (isFile) {
-      const file = fs.readFileSync(data, "UTF8");
-      switch (mime.lookup(data)) {
-        case "application/json":
-          try {
-            const parsed = JSON.parse(file);
-            const transformed = yield transform(parsed, options.output);
-            console.log(transformed);
-          } catch (err) {
-            return err;
-          }
-          break;
-        case "text/csv":
-          const parsed = csvParse(file, {
-            columns: true,
-            trim: true,
-            quote:  (options.quote || '"'),
-            delimiter: (options.delimiter || ",")
-          });
-          const transformed = yield transform(parsed, (options.output || "json"));
-          console.log(transformed);
+  return new Promise((resolve, reject) => {
+    co(function*() {
+      if (isFile) {
+        const file = fs.readFileSync(data, "UTF8");
+        switch (mime.lookup(data)) {
+          case "application/json":
+            try {
+              const parsed = JSON.parse(file);
+              const transformed = yield transform(parsed, options.output);
+              return resolve(transformed);
+            } catch (err) {
+              return reject(err);
+            }
+          case "text/csv":
+            try {
+              const parsed = csvParse(file, {
+                columns: true,
+                trim: true,
+                quote:  (options.quote || '"'),
+                delimiter: (options.delimiter || ",")
+              });
+              const transformed = yield transform(parsed, (options.output || "json"));
+              return resolve(transformed);
+            } catch (err) {
+              return reject(err);
+            }
+        }
+      } else {
+        switch (options.format) {
+          case "json":
+            try {
+              const parsed = JSON.parse(data);
+              const transformed = yield transform(parsed, options.output);
+              return resolve(transformed);
+            } catch (err) {
+              return reject(err);
+            }
+          case "tsv":
+          case "csv":
+          default:
+            try {
+              const parsed = csvParse(data, {
+                columns: true,
+                trim: true,
+                quote:  (options.quote || '"'),
+                delimiter: (options.delimiter || ",")
+              });
+              const transformed = yield transform(parsed, (options.output || "json"));
+              return resolve(transformed);
+            } catch (err) {
+              return reject(err);
+            }
+        }
       }
-    } else {
-      switch (options.format) {
-        case "json":
-          try {
-            const parsed = JSON.parse(data);
-            const transformed = yield transform(parsed, options.output);
-            console.log(transformed);
-          } catch (err) {
-            return err;
-          }
-        case "tsv":
-        case "csv":
-        default:
-          const parsed = csvParse(data, {
-            columns: true,
-            trim: true,
-            quote:  (options.quote || '"'),
-            delimiter: (options.delimiter || ",")
-          });
-          const transformed = yield transform(parsed, (options.output || "json"));
-          console.log(transformed);
-      }
-    }
+    });
   });
-}
+};
 
 module.exports = tdf;
