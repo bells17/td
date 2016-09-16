@@ -51,10 +51,10 @@ const tdf = (data, options, isFile) => {
           const parsed = csvParse(file, {
             columns: true,
             trim: true,
-            quote:  (options.quote || "'"),
+            quote:  (options.quote || '"'),
             delimiter: (options.delimiter || ",")
           });
-          const transformed = yield transform(parsed, options.output);
+          const transformed = yield transform(parsed, (options.output || "json"));
           console.log(transformed);
       }
     } else {
@@ -73,10 +73,10 @@ const tdf = (data, options, isFile) => {
           const parsed = csvParse(data, {
             columns: true,
             trim: true,
-            quote:  (options.quote || "'"),
+            quote:  (options.quote || '"'),
             delimiter: (options.delimiter || ",")
           });
-          const transformed = yield transform(parsed, options.output);
+          const transformed = yield transform(parsed, (options.output || "json"));
           console.log(transformed);
       }
     }
