@@ -59,6 +59,19 @@ const tdf = (data, options, isFile) => {
             } catch (err) {
               return reject(err);
             }
+          case "text/tab-separated-values":
+            try {
+              const parsed = csvParse(file, {
+                columns: true,
+                trim: true,
+                quote:  (options.quote || '"'),
+                delimiter: (options.delimiter || "\t")
+              });
+              const transformed = yield transform(parsed, (options.output || "json"));
+              return resolve(transformed);
+            } catch (err) {
+              return reject(err);
+            }
         }
       } else {
         switch (options.format) {
@@ -71,6 +84,18 @@ const tdf = (data, options, isFile) => {
               return reject(err);
             }
           case "tsv":
+            try {
+              const parsed = csvParse(data, {
+                columns: true,
+                trim: true,
+                quote:  (options.quote || '"'),
+                delimiter: (options.delimiter || "\t")
+              });
+              const transformed = yield transform(parsed, (options.output || "json"));
+              return resolve(transformed);
+            } catch (err) {
+              return reject(err);
+            }
           case "csv":
           default:
             try {
