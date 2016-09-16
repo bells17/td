@@ -22,8 +22,11 @@
   "homepage": "https://github.com/bells17/tdf",
   "license": "MIT",
   "dependencies": {
+    "co": "^4.6.0",
     "commander": "^2.9.0",
-    "csv-parse": "^1.1.7"
+    "csv-parse": "^1.1.7",
+    "csv-stringify": "^1.0.4",
+    "node-mime": "^1.0.0"
   },
   "bin": {
     "tdf": "bin/tdf"
