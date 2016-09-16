@@ -2,6 +2,7 @@
 "use strict";
 
 const tdf = require("../index")
+const co = require('co');
 
 const program = require("commander");
 program
@@ -19,11 +20,15 @@ program.on('--help', function(){
   console.log('');
 });
 
+
 if (process.stdin.isTTY) {
   if (!program.args[0]) {
     return program.help();
   }
-  tdf(program.args[0], program, true);
+  co(function*() {
+    const transformed = yield tdf(program.args[0], program, true);
+    console.log(transformed);
+  });
 } else {
   if (!program.format) {
     return program.help();
@@ -36,6 +41,9 @@ if (process.stdin.isTTY) {
       input += chunk;
     })
     .on('end', () => {
-      tdf(input, program);
+      co(function*() {
+        const transformed = yield tdf(input, program);
+        console.log(transformed);
+      });
     });
 }
