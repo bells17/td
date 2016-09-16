@@ -20,7 +20,6 @@ program.on('--help', function(){
 });
 
 if (process.stdin.isTTY) {
-  console.log("tty")
   if (!program.args[0]) {
     return program.help();
   }

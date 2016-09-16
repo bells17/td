@@ -1,6 +1,6 @@
 {
   "name": "tdf",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Transform data format cli",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "commander": "^2.9.0",
     "csv-parse": "^1.1.7",
     "csv-stringify": "^1.0.4",
-    "node-mime": "^1.0.0"
+    "mime": "^1.3.4"
   },
   "bin": {
     "tdf": "bin/tdf"
