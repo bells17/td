@@ -1,3 +1,42 @@
 #!/usr/bin/env node
 "use strict";
-require("../index");
+
+const tdf = require("../index")
+
+const program = require("commander");
+program
+  .option("-d --delimiter [delimiter]", "delimiter", String)
+  .option("-f --format [stdin format]", "stdin format", String)
+  .option("-q --quote [csv quote string]", "csv quote string", String)
+  .option("-o --output [output format]", "output data format", String)
+  .parse(process.argv);
+
+program.on('--help', function(){
+  console.log('  Examples:');
+  console.log('');
+  console.log('    $ tdf sample.csv');
+  console.log('    $ cat sample.csv | tdf -f csv');
+  console.log('');
+});
+
+if (process.stdin.isTTY) {
+  console.log("tty")
+  if (!program.args[0]) {
+    return program.help();
+  }
+  tdf(program.args[0], program, true);
+} else {
+  if (!program.format) {
+    return program.help();
+  }
+  let input = "";
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin
+    .on('data', (chunk) => {
+      input += chunk;
+    })
+    .on('end', () => {
+      tdf(input, program);
+    });
+}
