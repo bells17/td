@@ -4,7 +4,8 @@
   "description": "Transform data format cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "$(npm bin)/mocha --require intelli-espower-loader ./test.js",
+    "example": "$(npm bin)/../../bin/tdf sample/sample.json"
   },
   "author": "bells17",
   "repository": {
@@ -30,5 +31,10 @@
   },
   "bin": {
     "tdf": "bin/tdf"
+  },
+  "devDependencies": {
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^3.0.2",
+    "power-assert": "^1.4.1"
   }
 }
