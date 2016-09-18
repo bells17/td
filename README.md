@@ -6,7 +6,7 @@ Transform data format cli.
 
 ### usage
 
-```
+```sh
 $ npm install -g tdf
 $ echo -e "aaa,bbb\n111,222" > sample.csv
 $ tdf sample.csv
