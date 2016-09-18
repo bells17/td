@@ -12,7 +12,7 @@ const transformToCSV = (parsed, delimiter) => {
       if (err) {
         return reject(err);
       }
-      resolve(csv);
+      resolve(csv.trim());
     });
   });
 };
