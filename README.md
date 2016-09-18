@@ -11,13 +11,8 @@ $ npm install -g tdf
 $ echo -e "aaa,bbb\n111,222" > sample.csv
 $ tdf sample.csv
 [{"aaa":"111","bbb":"222"}]
-$
 $ echo '[{"aaa":"111","bbb":"222"}]' > sample.json
 $ tdf sample.json
 aaa,bbb
 111,222
 ```
-
-### requirements
-
-nodejs@4.0.0 ~
