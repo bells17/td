@@ -1,9 +1,9 @@
 "use strict";
 
-const fs = require("fs");
-const co = require("co");
-const assert = require("power-assert");
-const tdf = require("../src/index");
+import fs from "fs";
+import co from "co";
+import assert from "power-assert";
+import tdf from "../src/tdf";
 
 const filepath = `${__dirname}/data/sample`;
 
@@ -40,7 +40,7 @@ describe("tdf", () => {
         co(function*() {
           let options = {};
           if (v.output) {
-            options.output = v.output
+            options.output = v.output;
           }
           const transformed = yield tdf(`${filepath}.${v.from}`, options, true);
           const expected = fs.readFileSync(`${filepath}.${v.to}`, "utf8");
@@ -83,7 +83,7 @@ describe("tdf", () => {
         co(function*() {
           let options = { format: v.from };
           if (v.output) {
-            options.output = v.output
+            options.output = v.output;
           }
           const transformed = yield tdf(fs.readFileSync(`${filepath}.${v.from}`, "utf8"), options);
           const expected = fs.readFileSync(`${filepath}.${v.to}`, "utf8");

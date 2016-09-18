@@ -1,12 +1,14 @@
 {
   "name": "tdf",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Transform data format cli",
   "main": "lib/index.js",
   "scripts": {
     "build": "$(npm bin)/babel src --out-dir lib --source-maps inline",
     "watch": "$(npm bin)/babel src --out-dir lib --watch --source-maps inline",
-    "test": "$(npm bin)/mocha --timeout 5000 --compilers js:babel-register ./test/*.spec.js"
+    "lint": "$(npm bin)/eslint test/**/*.js src/**/*.js",
+    "spec": "$(npm bin)/mocha --timeout 5000 --compilers js:babel-register ./test/*.spec.js",
+    "test": "npm run lint && npm run spec"
   },
   "author": "bells17",
   "repository": {
@@ -37,6 +39,8 @@
     "babel-cli": "^6.14.0",
     "babel-preset-es2015-node": "^6.1.1",
     "babel-register": "^6.14.0",
+    "eslint": "^3.5.0",
+    "eslint-plugin-import": "^1.15.0",
     "mocha": "^3.0.2",
     "power-assert": "^1.4.1"
   }
