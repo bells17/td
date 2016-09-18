@@ -28,8 +28,12 @@ if (process.stdin.isTTY) {
     program.help();
   }
   co(function*() {
-    const transformed = yield tdf(program.args[0], program, true);
-    console.log(transformed);
+    try {
+      const transformed = yield tdf(program.args[0], program, true);
+      console.log(transformed);
+    } catch (err) {
+      console.log(err.stack || err);
+    }
   });
 } else {
   if (!program.format) {
@@ -44,8 +48,12 @@ if (process.stdin.isTTY) {
     })
     .on("end", () => {
       co(function*() {
-        const transformed = yield tdf(input, program);
-        console.log(transformed);
+        try {
+          const transformed = yield tdf(input, program);
+          console.log(transformed);
+        } catch (err) {
+          console.log(err.stack || err);
+        }
       });
     });
 }
